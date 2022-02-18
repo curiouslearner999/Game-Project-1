@@ -20,3 +20,4 @@ Stretch goals:
     Allow for user to select grid size
     Generate random numbers greater than 4
 
+![alt+text](https://github.com/curiouslearner999/Game-Project-1/blob/main/img/2048game.png)
