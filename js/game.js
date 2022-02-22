@@ -9,14 +9,14 @@
     // Create a tiles on the board
     const createBoard = () => {
         for(let i = 0; i < width*width; i++) {
-            let tile = document.createElement('div')
-            tile.innerHTML = 0
+            tile = document.createElement('div')
+            tile.innerHTML = ""
             gameBoard.appendChild(tile)
             tiles.push(tile)
 
-            generate()
+            // generate()
 
-            generate()
+            // generate()
         }
     }     
     createBoard()
@@ -24,7 +24,7 @@
     // function to generate random 2 on the board
     const generate = () => {
         let randomNumber = Math.floor(Math.random()*tiles.length)
-        if (tiles[randomNumber].innerHTML === 0) {
+        if (tiles[randomNumber].innerHTML === "") {
            tiles[randomNumber].innerHTML = 2
         } else {
             generate()
@@ -59,8 +59,9 @@
     }
 
     newGame.addEventListener('click',() => {
-        createBoard()
+        
     })
+
     document.addEventListener('keyup', control)
     
     
