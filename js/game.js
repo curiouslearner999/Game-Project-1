@@ -3,6 +3,8 @@
     let score = 0
     let rows = 4
     let columns = 4
+
+
     window.onload = function() {
         startGame()
     }
@@ -50,23 +52,6 @@
         }
     }
 
-    document.addEventListener("keyup", (e) =>{
-        if (e.code == "ArrowLeft") {
-            moveLeft()
-            generateTwo()
-        } else if (e.code == "ArrowRight") {
-            moveRight()
-            generateTwo()
-        } else if (e.code == "ArrowUp") {
-            moveUp()
-            generateTwo()
-        } else if (e.code == "ArrowDown") {
-            moveDown()
-            generateTwo()
-        }
-        document.getElementById("score".innerText = score)
-    })
-
     const filterZeros = (row) => {
 
        return row.filter(val => val !=0) //create new array of all values not equeal to zero
@@ -100,7 +85,7 @@
             gameBoard[r] = row
             for (let c = 0; c < columns; c++) {
                 let tile = document.getElementById(`${r}-${c}`)
-                console.log(tile)
+                // console.log(tile)
                 let val = gameBoard[r][c]
                 updateTile(tile, val)
             }    
@@ -183,3 +168,20 @@
         }
         return false;
     } 
+
+    document.addEventListener("keyup", (e) =>{
+        if (e.code == "ArrowLeft") {
+            moveLeft()
+            generateTwo()
+        } else if (e.code == "ArrowRight") {
+            moveRight()
+            generateTwo()
+        } else if (e.code == "ArrowUp") {
+            moveUp()
+            generateTwo()
+        } else if (e.code == "ArrowDown") {
+            moveDown()
+            generateTwo()
+        }
+        document.getElementById("score").innerText = score
+    })
