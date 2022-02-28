@@ -1,6 +1,6 @@
 # 2048 Puzzle Game Clone
 
-Inspired by 2048 made by 19 yo Gabriele Cirulli in 2014 in one weekend 
+Inspired by [2048](https://play2048.co/) made by 19 yo Gabriele Cirulli in 2014 in one weekend 
 
 ### Concept: 
     - Get tile that with a number 2048
