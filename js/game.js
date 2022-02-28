@@ -4,7 +4,6 @@
     let rows = 4
     let columns = 4
 
-
     window.onload = function() {
         startGame()
     }
@@ -168,6 +167,10 @@
         }
         return false;
     } 
+
+    const checkForWin = () => {
+
+    }
 
     document.addEventListener("keyup", (e) =>{
         if (e.code == "ArrowLeft") {
