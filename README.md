@@ -8,7 +8,7 @@ Inspired by [2048](https://play2048.co/) made by 19 yo Gabriele Cirulli in 2014 
 ### The user's function:
     - User uses arrow keys to move tiles 
     - Tiles with identical numbers will join and add
-    - Computer will add new tile with number 2 or 4 as user moves current tiles to join
+    - Computer will add new tile with number 2 as user moves current tiles to join
     - When user fills the board and no tiles to join games is over
 
 ### Technologies:
