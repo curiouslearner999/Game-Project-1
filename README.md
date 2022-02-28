@@ -3,7 +3,7 @@
 Inspired by [2048](https://play2048.co/) made by 19 yo Gabriele Cirulli in 2014 in one weekend 
 
 ### Concept: 
-    - Get tile that with a number 2048
+    - Get tile that with a number 2048 to win the game
 
 ### The user's function:
     - User uses arrow keys to move tiles 
