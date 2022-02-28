@@ -79,7 +79,7 @@
             if (row[i] == row[i+1]){
                 row[i] *=2
                 row[i+1] = 0
-                score +=row[i]
+                score += row[i]
             }
         }
 
@@ -108,13 +108,13 @@
     }
 
     const moveRight = () => {
-       for(let r = 0; r < rows; r++){
+       for (let r = 0; r < rows; r++){
            let  row = gameBoard[r]
            row.reverse()
            row = move(row) 
            gameBoard[r] = row.reverse()
            for (let c = 0; c < columns; c++){
-               let tile = document.getElementById(`${r}- ${c}`)
+               let tile = document.getElementById(`${r}-${c}`)
                let val = gameBoard[r][c]
                updateTile(tile, val)
 
@@ -129,7 +129,7 @@
 
             for(let r = 0; r < rows; r++){
                 gameBoard[r][c] = row[r]
-                let tile = document.getElementById(`${r}- ${c}`)
+                let tile = document.getElementById(`${r}-${c}`)
                 let val = gameBoard[r][c]
                 updateTile(tile, val)
             }
@@ -145,7 +145,7 @@
 
             for(let r = 0; r < rows; r++){
                 gameBoard[r][c] = row[r]
-                let tile = document.getElementById(`${r}- ${c}`)
+                let tile = document.getElementById(`${r}-${c}`)
                 let val = gameBoard[r][c]
                 updateTile(tile, val)
             }
