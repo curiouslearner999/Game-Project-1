@@ -1,79 +1,185 @@
 
-    const gameBoard = document.getElementById('board')
-    const scoreBoard = document.getElementById('score')
-    const resultDisplay = document.getElementById('result')
-    const newGame = document.getElementById('newGame')
-    const width = 4 
-    let tiles = []
+    let gameBoard 
+    let score = 0
+    let rows = 4
+    let columns = 4
+    window.onload = function() {
+        startGame()
+    }
+    const startGame = () => {
 
-    // function to generate random 2 on the board
-    
-    const generate = () => {
-        //console.log("generating 2s")
-        let randomNumber = Math.floor(Math.random()*tiles.length)
-        if (tiles[randomNumber].innerText === "") {
-           tiles[randomNumber].innerText = "2"
-           //console.log(randomNumber)
-        } else {
-            generate()
+        gameBoard = [
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0]
+        ]
+
+
+        for(let r = 0; r < rows; r++) {
+            for(let c = 0; c < columns; c++){
+                let tile = document.createElement("div")
+                // tile.id = r.toString() + "-" + c.toString();
+                tile.id = `${r}-${c}`
+                let val = gameBoard[r][c]
+
+                updateTile(tile,val)
+                document.getElementById("gameBoard").append(tile)
+            }
         }
+
+        //generate 2 to start the game
+        generateTwo()
+        generateTwo()
+    }
+
+    // checks for tiles value updates tiles on the board
+    const updateTile = (tile,val) => {
+        tile.innerText = ""
+        tile.classList.value = "" // clear classlist
+        tile.classList.add("tile")
+
+        if(val > 0) {
+            tile.innerText = `${val}`
+            
+            if(val <= 4096) {
+                tile.classList.add(`x${val}`)
+            } else {
+                tile.classList.add("x8192")
+            }
+        }
+    }
+
+    document.addEventListener("keyup", (e) =>{
+        if (e.code == "ArrowLeft") {
+            moveLeft()
+            generateTwo()
+        } else if (e.code == "ArrowRight") {
+            moveRight()
+            generateTwo()
+        } else if (e.code == "ArrowUp") {
+            moveUp()
+            generateTwo()
+        } else if (e.code == "ArrowDown") {
+            moveDown()
+            generateTwo()
+        }
+        document.getElementById("score".innerText = score)
+    })
+
+    const filterZeros = (row) => {
+
+       return row.filter(val => val !=0) //create new array of all values not equeal to zero
         
     }
-    // Create a tiles on the board
-    const createBoard = () => {
-        //console.log("Creating a board")
-        for(let i = 0; i < width*width; i++) {
-            tile = document.createElement('div')
-            tile.innerText = ""
-            gameBoard.appendChild(tile)
-            tiles.push(tile)
-           
+
+    const move = (row) => {
+        row = filterZeros(row)
+        for(let i = 0; i < row.length-1; i++){
+            if (row[i] == row[i+1]){
+                row[i] *=2
+                row[i+1] = 0
+                score +=row[i]
+            }
         }
 
-        generate()
-
-        generate()
-    }     
-    createBoard()
-
-    
-    
-    
-
-    // function to move tiles left
-    const moveLeft = () => {
+        row = filterZeros(row)
         
+        // add zeroes to new array
+        while (row.length < columns) {
+            row.push(0)
+        }
+        return row 
+    }
+
+    const moveLeft = () => {
+
+        for(let r = 0; r < rows; r++) {
+            let row = gameBoard[r]
+            row = move(row)
+            gameBoard[r] = row
+            for (let c = 0; c < columns; c++) {
+                let tile = document.getElementById(`${r}-${c}`)
+                console.log(tile)
+                let val = gameBoard[r][c]
+                updateTile(tile, val)
+            }    
+        }
     }
 
     const moveRight = () => {
-        
+       for(let r = 0; r < rows; r++){
+           let  row = gameBoard[r]
+           row.reverse()
+           row = move(row) 
+           gameBoard[r] = row.reverse()
+           for (let c = 0; c < columns; c++){
+               let tile = document.getElementById(`${r}- ${c}`)
+               let val = gameBoard[r][c]
+               updateTile(tile, val)
+
+           }         
+        }
     }
 
     const moveUp = () => {
-        
+        for (let c = 0; c < columns; c++){
+            let row = [gameBoard[0][c],gameBoard[1][c],gameBoard[2][c],gameBoard[3][c]]
+            row = move(row)
+
+            for(let r = 0; r < rows; r++){
+                gameBoard[r][c] = row[r]
+                let tile = document.getElementById(`${r}- ${c}`)
+                let val = gameBoard[r][c]
+                updateTile(tile, val)
+            }
+        }
     }
 
     const moveDown = () => {
-        
+        for (let c = 0; c < columns; c++){
+            let row = [gameBoard[0][c],gameBoard[1][c],gameBoard[2][c],gameBoard[3][c]]
+            row.reverse()
+            row = move(row)
+            row.reverse()
+
+            for(let r = 0; r < rows; r++){
+                gameBoard[r][c] = row[r]
+                let tile = document.getElementById(`${r}- ${c}`)
+                let val = gameBoard[r][c]
+                updateTile(tile, val)
+            }
+        }
     }
 
-    const checkWin = () =>{
 
+    const generateTwo = () => {
+        if (!findEmptyTile()) {
+            return;
+        }
+        let found = false;
+        while (!found) {
+            //find random row and column to place a 2 in
+            let r = Math.floor(Math.random() * rows);
+            let c = Math.floor(Math.random() * columns);
+            if (gameBoard[r][c] == 0) {
+                gameBoard[r][c] = 2;
+                let tile = document.getElementById(`${r}-${c}`);
+                tile.innerText = "2";
+                tile.classList.add("x2");
+                found = true;
+            }
+        }
     }
 
-    const checkGameOver = () => {
-
-    }
-
-    newGame.addEventListener('click',() => {
-        
-    })
-
-    document.addEventListener('keyup', (e) => {
-
-    })
-    
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        
-    })
+    const findEmptyTile = () => {
+        let count = 0
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < columns; c++) {
+                if (gameBoard[r][c] == 0) { //at least one zero in the board
+                    return true;
+                }
+            }
+        }
+        return false;
+    } 
